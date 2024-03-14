@@ -3,14 +3,14 @@ import React from "react";
 import styled from "styled-components"
 
 // todo: typescript
-const IndicatorsComponent = ({data, activeImage}: any) => (
-    <IndicatorsWrapper>
-        <IndicatorsContent>{data[activeImage].id + 1} of {data.length}</IndicatorsContent>
-        <Indicators>
-        {data.map(({ id }) => (
-          <Indicator key={id} $active={id === activeImage} />
-        ))}
-        </Indicators>
+const IndicatorsComponent = ({ data, activeImage }: any) => (
+  <IndicatorsWrapper>
+    <IndicatorsContent>{data[activeImage].id + 1} of {data.length}</IndicatorsContent>
+    <Indicators>
+      {data.map(({ id }: any) => (
+        <Indicator key={id} $active={id === activeImage} />
+      ))}
+    </Indicators>
   </IndicatorsWrapper>
 )
 
@@ -36,4 +36,4 @@ const Indicator = styled.span<{ $active?: boolean; }>`
 `;
 
 export { IndicatorsComponent as Indicators };
-  
+
