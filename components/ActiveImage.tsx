@@ -3,8 +3,22 @@ import { sliderVariants, transition } from "@/utils/framerMotion"
 import { motion, AnimatePresence } from "framer-motion"
 import styled from 'styled-components'
 
-const ActiveImage = ({ direction, imageCount, currentImage, swipeToImage }) => {
-  const dragEndHandler = (dragInfo) => {
+interface ActiveImageProps {
+  direction: number;
+  imageCount: number;
+  currentImage: string;
+  swipeToImage: (swipeDirection: 1 | -1) => void;
+}
+
+interface DragInfo {
+  offset: {
+    x: number;
+    y: number;
+  };
+}
+
+const ActiveImage = ({ direction, imageCount, currentImage, swipeToImage }: ActiveImageProps) => {
+  const dragEndHandler = (dragInfo: DragInfo) => {
     const swipeThreshold = 50
     if (dragInfo.offset.x > swipeThreshold) return swipeToImage(-1);
 

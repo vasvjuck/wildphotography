@@ -18,7 +18,7 @@ export default function Home() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const handleMouseMove = (event) => {
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     x.set(event.clientX);
     y.set(event.clientY);
   }

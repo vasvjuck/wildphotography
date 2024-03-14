@@ -1,7 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const RightSection = ({ swipeToImage, nextImage, author, date }) => (
+interface RightSectionProps {
+  swipeToImage: (swipeDirection: 1 | -1) => void;
+  nextImage: string;
+  author: string;
+  date: string;
+}
+
+const RightSection = ({ swipeToImage, nextImage, author, date }: RightSectionProps) => (
   <RightSectionWrapper>
     <NextImage src={nextImage} onClick={() => swipeToImage(1)} />
     <AuthorContainer>

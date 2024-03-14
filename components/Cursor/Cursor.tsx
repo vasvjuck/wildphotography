@@ -1,9 +1,13 @@
-import { motion } from 'framer-motion'
+import { MotionValue, motion } from 'framer-motion'
 import React from 'react'
 import styled from 'styled-components'
 import { CursorElement } from './CursorElement'
+interface CursorProps {
+  x: MotionValue<number>;
+  y: MotionValue<number>;
+}
 
-const Cursor = ({ x, y }) => (
+const Cursor = ({ x, y }: CursorProps) => (
   <ContainerCursor>
     <WrapperCursor
       style={{

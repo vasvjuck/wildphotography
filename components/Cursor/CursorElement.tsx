@@ -19,7 +19,7 @@ export const CursorElement = () => (
       r="19"
       data-svg-origin="45 45"
       transform="matrix(1,0,0,1,0,0)"
-    ></circle>
+    />
     <circle
       data-v-a0f090ca=""
       id="cursor-pin"
@@ -28,7 +28,7 @@ export const CursorElement = () => (
       cy="45"
       r="2"
       data-svg-origin="43 43"
-    ></circle>
+    />
     <path
       data-v-a0f090ca=""
       id="cursor-shape"
@@ -36,6 +36,6 @@ export const CursorElement = () => (
       fill="#FF5368"
       data-svg-origin="46.07149887084961 44.95000076293945"
       transform="matrix(0,0,0,0,46.07149887084961,44.95000076293945)"
-    ></path>
+    />
   </svg>
 );
