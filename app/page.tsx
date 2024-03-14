@@ -34,7 +34,7 @@ export default function Home() {
         <Wrapper
           initial={{ x: direction !== 1 ? '100%' : '-100%', width: '100%' }}
           animate={{ x: '0%', width: '100%' }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
+          transition={{ duration: 1.5, ease: 'easeInOut' }}
         >
           <Backdrop src={currentImage} />
         </Wrapper>

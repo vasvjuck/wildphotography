@@ -64,5 +64,12 @@ const MainImage = styled(motion.div)`
   will-change: transform, opacity;
   border-radius: 10px;
   border: 1px solid #000;
+  &:hover {
+    cursor: grab;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
 `
 export default ActiveImage
