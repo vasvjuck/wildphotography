@@ -1,7 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const LeftSection = ({ swipeToImage, prevImage }) => (
+interface LeftSectionProps {
+  swipeToImage: (swipeDirection: 1 | -1) => void;
+  prevImage: string;
+}
+
+const LeftSection = ({ swipeToImage, prevImage }: LeftSectionProps) => (
   <LeftSectionWrapper>
     <PrevImage src={prevImage} onClick={() => swipeToImage(-1)} />
   </LeftSectionWrapper>
