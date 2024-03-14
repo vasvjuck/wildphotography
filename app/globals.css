@@ -12,9 +12,12 @@ body {
 
 body {
   color: #fff;
+  background-color: #d8d9cf;
+  cursor: none;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  cursor: none;
 }

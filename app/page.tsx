@@ -1,65 +1,62 @@
 'use client'
 
 import React, { useState } from "react"
-import { motion, AnimatePresence, PanInfo } from "framer-motion"
+import { motion, useMotionValue, AnimatePresence } from "framer-motion"
 import { wrap } from "@popmotion/popcorn"
 import { data } from "@/utils/data"
-
-import styled from "styled-components"
 import { Indicators } from "@/components/Indicators"
-import { sliderVariants, transition } from "@/utils/framerMotion"
-
+import Cursor from "@/components/Cursor/Cursor"
+import ActiveImage from "@/components/ActiveImage"
+import styled from "styled-components"
+import LeftSection from "@/components/LeftSection"
+import RightSection from "@/components/RightSection"
 
 export default function Home() {
   const [[imageCount, direction], setImageCount] = useState([0, 0])
-
   const activeImageIndex = wrap(0, data.length, imageCount)
-  const {currentImage, headline, prevImage, nextImage} = data[activeImageIndex];
+  const { currentImage, headline, prevImage, nextImage, author, date } = data[activeImageIndex];
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const handleMouseMove = (event) => {
+    x.set(event.clientX);
+    y.set(event.clientY);
+  }
 
   const swipeToImage = (swipeDirection: number) => {
     setImageCount((prevState: [number, number]) => [prevState[0] + swipeDirection, swipeDirection]);
   };
-  
-  const dragEndHandler = (dragInfo: PanInfo) => {
-    const swipeThreshold = 50
-    if (dragInfo.offset.x > swipeThreshold) return swipeToImage(-1);
 
-    if (dragInfo.offset.x < -swipeThreshold) return swipeToImage(1);
-  }
-  
   return (
-    <Main>
-      <Wrapper>
-        <Backdrop src={currentImage}  />
-      </Wrapper>
-      <MainImageWrapper>
-        <AnimatePresence initial={false} custom={direction}>
-          <MainImage
-            key={imageCount}
-            style={{
-              backgroundImage: `url(${currentImage})`
-            }}
-            custom={direction}
-            variants={sliderVariants}
-            initial="incoming"
-            animate="active"
-            exit="exit"
-            transition={transition}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
-          />
-        </AnimatePresence>
-      </MainImageWrapper>
+    <Main onMouseMove={handleMouseMove}>
+      <Cursor x={x} y={y} />
+      <AnimatePresence mode='wait' key={imageCount}>
+        <Wrapper
+          initial={{ x: direction !== 1 ? '100%' : '-100%', width: '100%' }}
+          animate={{ x: '0%', width: '100%' }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
+        >
+          <Backdrop src={currentImage} />
+        </Wrapper>
+      </AnimatePresence>
+      <LeftSection prevImage={prevImage} swipeToImage={swipeToImage} />
+      <ActiveImage
+        direction={direction}
+        imageCount={imageCount}
+        currentImage={currentImage}
+        swipeToImage={swipeToImage}
+      />
       <ContentWrapper>
-          <Heading>{headline}</Heading>
-          <Indicators data={data} activeImage={activeImageIndex}/>
+        <Heading>{headline}</Heading>
+        <Indicators data={data} activeImage={activeImageIndex} />
       </ContentWrapper>
-      {/* TODO: alt */}
-     <PrevImage src={prevImage} onClick={() => swipeToImage(-1)} />
-     <NextImage src={nextImage} className="image nextImage" onClick={() => swipeToImage(1)} />
-  </Main>
+      <RightSection
+        nextImage={nextImage}
+        swipeToImage={swipeToImage}
+        author={author}
+        date={date}
+      />
+    </Main>
   );
 }
 
@@ -67,10 +64,9 @@ const Main = styled.main`
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
 `
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   position: absolute;
   top: 0;
   right: 0;
@@ -85,39 +81,13 @@ const Backdrop = styled.img`
   object-fit: cover;
   filter: blur(16px);
 `
-const MainImageWrapper = styled.div`
-  position: relative;
-  height: 680px;
-  width: 512px;
-  overflow: hidden;
-`
-// TODO: check styles
-const MainImage =  styled(motion.div)`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  will-change: transform, opacity;
-  border-radius: 10px;
-  border: 1px solid #000;
-
-  &:hover {
-    cursor: grab;
-  }
-
-  &:active {
-    cursor: grabbing;
-  }
-`
 const ContentWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `
-const Heading =  styled.h1`
+const Heading = styled.h1`
   font-size: 180px;
   font-weight: 400;
   text-transform: uppercase;
@@ -129,14 +99,4 @@ const Image = styled.img`
   width: 248px;
   border-radius: 10px;
   border: 1px solid #000;
-`
-const PrevImage = styled(Image)`
-  position: absolute;
-  left: 16px;
-  bottom: 16px;
-`
-const NextImage = styled(Image)`
-  position: absolute;
-  right: 16px;
-  top: 16px;
 `
