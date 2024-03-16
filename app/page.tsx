@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { motion, useMotionValue, AnimatePresence } from "framer-motion"
 import { wrap } from "@popmotion/popcorn"
 import { data } from "@/utils/data"
@@ -10,6 +10,14 @@ import ActiveImage from "@/components/ActiveImage"
 import styled from "styled-components"
 import LeftSection from "@/components/LeftSection"
 import RightSection from "@/components/RightSection"
+
+// const formatOptionLabel = ({ label }, { inputValue }) => {
+//   const highlighted = label.replace(
+//     new RegExp(inputValue, 'gi'),
+//     highlighted => `<span style="font-weight: 400;">${highlighted}</span>`,
+//   );
+//   return <span dangerouslySetInnerHTML={{ __html: highlighted }} />;
+// };
 
 export default function Home() {
   const [[imageCount, direction], setImageCount] = useState([0, 0])
@@ -88,15 +96,9 @@ const ContentWrapper = styled.div`
   transform: translate(-50%, -50%);
 `
 const Heading = styled.h1`
-  font-size: 180px;
+  font-size: 220px;
   font-weight: 400;
   text-transform: uppercase;
   text-align: center;
   user-select: none;
-`
-const Image = styled.img`
-  height: 330px;
-  width: 248px;
-  border-radius: 10px;
-  border: 1px solid #000;
 `

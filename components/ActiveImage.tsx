@@ -18,6 +18,7 @@ interface DragInfo {
 }
 
 const ActiveImage = ({ direction, imageCount, currentImage, swipeToImage }: ActiveImageProps) => {
+
   const dragEndHandler = (dragInfo: DragInfo) => {
     const swipeThreshold = 50
     if (dragInfo.offset.x > swipeThreshold) return swipeToImage(-1);
