@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { sliderVariants, transition } from "@/utils/framerMotion"
+import { sliderVariants } from "@/utils/framerMotion"
 import { motion, AnimatePresence } from "framer-motion"
 import styled from 'styled-components'
 import { Indicators } from '@/components';
@@ -34,7 +34,7 @@ const MainSection: FC<MainSectionProps> = ({ direction, imageCount, activeImage,
   return (
     <AnimatePresence>
       <BackHeading>{headline}</BackHeading>
-      <MainImageWrapper>
+      <MainSectionContainer>
         <MainImage
           key={imageCount}
           style={{ backgroundImage: `url(${currentImage})` }}
@@ -43,20 +43,23 @@ const MainSection: FC<MainSectionProps> = ({ direction, imageCount, activeImage,
           initial="incoming"
           animate="active"
           exit="exit"
-          transition={transition}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
+          transition={{
+            duration: 1.5,
+            ease: [0.56, 0.03, 0.12, 1.04]
+          }}
         >
           <Heading>{headline}</Heading>
           <Indicators data={data} activeImage={activeImageIndex} />
         </MainImage>
-      </MainImageWrapper>
+      </MainSectionContainer>
     </AnimatePresence>
   )
 }
 
-const MainImageWrapper = styled.div`
+const MainSectionContainer = styled.div`
   position: relative;
   height: 680px;
   width: 512px;

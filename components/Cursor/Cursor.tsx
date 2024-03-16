@@ -10,13 +10,7 @@ interface CursorProps {
 const Cursor = ({ x, y }: CursorProps) => (
   <ContainerCursor>
     <WrapperCursor
-      style={{
-        x,
-        y,
-        position: "absolute",
-        pointerEvents: "none",
-        zIndex: 999,
-      }}
+      style={{ x, y }}
     >
       <CursorElement />
     </WrapperCursor>
@@ -24,23 +18,25 @@ const Cursor = ({ x, y }: CursorProps) => (
 )
 
 const ContainerCursor = styled.div`
-pointer-events: none;
-position: relative;
-position: fixed;
-top: 0;
-right: 0;
-bottom: 0;
-left: 0;
-z-index: 1;
+ pointer-events: none;
+ position: relative;
+ position: fixed;
+ top: 0;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ z-index: 1;
 `
 const WrapperCursor = styled(motion.div)`
-position: absolute;
-top: -40px;
-left: -60px;
-width: 60px;
-height: 60px;
-will-change: transform;
-contain: layout style size;
+  position: absolute;
+  top: -40px;
+  left: -60px;
+  width: 60px;
+  height: 60px;
+  will-change: transform;
+  contain: layout style size;
+  pointer-events: none;
+  z-index: 999;
 `
 
 export default Cursor;

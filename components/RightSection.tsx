@@ -9,17 +9,17 @@ interface RightSectionProps {
 }
 
 const RightSection = ({ swipeToImage, nextImage, author, date }: RightSectionProps) => (
-  <RightSectionWrapper>
+  <RightSectionContainer>
     <NextImage src={nextImage} onClick={() => swipeToImage(1)} />
     <AuthorContainer>
       <Author>{author}</Author>
       <Date>{date}</Date>
       <Link href="/">Have a look</Link>
     </AuthorContainer>
-  </RightSectionWrapper>
+  </RightSectionContainer>
 )
 
-const RightSectionWrapper = styled.div`
+const RightSectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

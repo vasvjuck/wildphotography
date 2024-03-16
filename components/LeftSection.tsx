@@ -7,12 +7,12 @@ interface LeftSectionProps {
 }
 
 const LeftSection: FC<LeftSectionProps> = ({ swipeToImage, prevImage }) => (
-  <LeftSectionWrapper>
+  <LeftSectionContainer>
     <PrevImage src={prevImage} onClick={() => swipeToImage(-1)} />
-  </LeftSectionWrapper>
+  </LeftSectionContainer>
 );
 
-const LeftSectionWrapper = styled.div`
+const LeftSectionContainer = styled.div`
   display: flex;
   align-self: flex-end;
   padding: 0 0 16px 16px;

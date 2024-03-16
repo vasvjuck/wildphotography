@@ -9,8 +9,3 @@ export const sliderVariants = {
     opacity: 0.2
   })
 }
-
-export const transition = {
-  duration: 1.5,
-  ease: [0.56, 0.03, 0.12, 1.04]
-}
