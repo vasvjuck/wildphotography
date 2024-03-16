@@ -1,28 +1,19 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from "react"
+import React, { useState } from "react"
 import { motion, useMotionValue, AnimatePresence } from "framer-motion"
 import { wrap } from "@popmotion/popcorn"
 import { data } from "@/utils/data"
-import { Indicators } from "@/components/Indicators"
 import Cursor from "@/components/Cursor/Cursor"
 import ActiveImage from "@/components/ActiveImage"
 import styled from "styled-components"
 import LeftSection from "@/components/LeftSection"
 import RightSection from "@/components/RightSection"
 
-// const formatOptionLabel = ({ label }, { inputValue }) => {
-//   const highlighted = label.replace(
-//     new RegExp(inputValue, 'gi'),
-//     highlighted => `<span style="font-weight: 400;">${highlighted}</span>`,
-//   );
-//   return <span dangerouslySetInnerHTML={{ __html: highlighted }} />;
-// };
-
 export default function Home() {
   const [[imageCount, direction], setImageCount] = useState([0, 0])
   const activeImageIndex = wrap(0, data.length, imageCount)
-  const { currentImage, headline, prevImage, nextImage, author, date } = data[activeImageIndex];
+  const { currentImage, prevImage, nextImage, author, date } = data[activeImageIndex];
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -51,13 +42,10 @@ export default function Home() {
       <ActiveImage
         direction={direction}
         imageCount={imageCount}
-        currentImage={currentImage}
+        activeImage={data[activeImageIndex]}
+        activeImageIndex={activeImageIndex}
         swipeToImage={swipeToImage}
       />
-      <ContentWrapper>
-        <Heading>{headline}</Heading>
-        <Indicators data={data} activeImage={activeImageIndex} />
-      </ContentWrapper>
       <RightSection
         nextImage={nextImage}
         swipeToImage={swipeToImage}
@@ -88,17 +76,4 @@ const Backdrop = styled.img`
   height: 100%;
   object-fit: cover;
   filter: blur(16px);
-`
-const ContentWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
-const Heading = styled.h1`
-  font-size: 220px;
-  font-weight: 400;
-  text-transform: uppercase;
-  text-align: center;
-  user-select: none;
 `
