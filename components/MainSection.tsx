@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from 'react'
 import { sliderVariants, transition } from "@/utils/framerMotion"
 import { motion, AnimatePresence } from "framer-motion"
 import styled from 'styled-components'
-import { Indicators } from './Indicators';
+import { Indicators } from '@/components';
 import { data } from "@/utils/data"
 import { nanoid } from 'nanoid'
 import { findOverflowLetters } from '@/utils/findOverflowLetters';
 
-interface ActiveImageProps {
+interface MainSectionProps {
   direction: number;
   imageCount: number;
   activeImage: {
@@ -25,7 +25,7 @@ interface DragInfo {
   };
 }
 
-const ActiveImage = ({ direction, imageCount, activeImage, activeImageIndex, swipeToImage }: ActiveImageProps) => {
+const MainSection = ({ direction, imageCount, activeImage, activeImageIndex, swipeToImage }: MainSectionProps) => {
   const { headline, currentImage } = activeImage;
   const headingRef = useRef(null)
   const wrapperRef = useRef(null)
@@ -42,47 +42,42 @@ const ActiveImage = ({ direction, imageCount, activeImage, activeImageIndex, swi
   }, [activeImage]);
 
   return (
-    <>
-      <MainImageWrapper ref={wrapperRef}>
-        <AnimatePresence>
-          <MainImage
-            key={imageCount}
-            style={{
-              backgroundImage: `url(${currentImage})`
-            }}
-            custom={direction}
-            variants={sliderVariants}
-            initial="incoming"
-            animate="active"
-            exit="exit"
-            transition={transition}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
-          />
-        </AnimatePresence>
+    <AnimatePresence>
+      <MainImageWrapper>
+        <MainImage
+          key={imageCount}
+          ref={wrapperRef}
+          style={{ backgroundImage: `url(${currentImage})` }}
+          custom={direction}
+          variants={sliderVariants}
+          initial="incoming"
+          animate="active"
+          exit="exit"
+          transition={transition}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
+        >
+          <ContentWrapper>
+            <Heading ref={headingRef}> {transformedHealine.map(letter => <span key={nanoid()}>{letter}</span>)}
+            </Heading>
+            <Indicators data={data} activeImage={activeImageIndex} />
+          </ContentWrapper>
+        </MainImage>
       </MainImageWrapper>
-      <ContentWrapper>
-        <Heading ref={headingRef}> {transformedHealine.map(letter => (
-          <span key={nanoid()}>{letter}</span>
-        ))}
-        </Heading>
-        <Indicators data={data} activeImage={activeImageIndex} />
-      </ContentWrapper>
-    </>
+    </AnimatePresence>
   )
 }
 
 const MainImageWrapper = styled.div`
-  position: relative;
-  height: 680px;
-  width: 512px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   overflow: hidden;
 `
 const MainImage = styled(motion.div)`
-  position: absolute;
-  height: 100%;
-  width: 100%;
+  height: 680px;
+  width: 512px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -108,7 +103,6 @@ const Heading = styled.h1`
   font-weight: 400;
   text-transform: uppercase;
   text-align: center;
-  user-select: none;
   width: 845px;
 `
-export default ActiveImage
+export default MainSection;

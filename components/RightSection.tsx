@@ -55,6 +55,11 @@ const Link = styled.a`
   border-radius: 24px;
   text-align: center;
   text-transform: uppercase;
+  transition: background-color .4s ease-in-out;
+
+  &:hover {
+    background-color: #d8d9cf;
+  }
 `
 
 export default RightSection
