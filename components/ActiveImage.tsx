@@ -109,6 +109,6 @@ const Heading = styled.h1`
   text-transform: uppercase;
   text-align: center;
   user-select: none;
-  max-width: 844px;
+  max-width: 900px;
 `
 export default ActiveImage
