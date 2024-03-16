@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import { sliderVariants, transition } from "@/utils/framerMotion"
 import { motion, AnimatePresence } from "framer-motion"
 import styled from 'styled-components'
@@ -25,7 +25,7 @@ interface DragInfo {
   };
 }
 
-const MainSection = ({ direction, imageCount, activeImage, activeImageIndex, swipeToImage }: MainSectionProps) => {
+const MainSection: FC<MainSectionProps> = ({ direction, imageCount, activeImage, activeImageIndex, swipeToImage }) => {
   const { headline, currentImage } = activeImage;
   const headingRef = useRef(null)
   const wrapperRef = useRef(null)

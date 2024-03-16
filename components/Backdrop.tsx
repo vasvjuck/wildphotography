@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { AnimatePresence, motion } from "framer-motion"
 import styled from 'styled-components'
 import { nanoid } from 'nanoid'
@@ -8,7 +8,7 @@ interface BackdropProps {
   currentImage: string;
 }
 
-const Backdrop = ({ currentImage, direction }: BackdropProps) => (
+const Backdrop: FC<BackdropProps> = ({ currentImage, direction }) => (
   <AnimatePresence key={nanoid()}>
     <WrapperElement
       initial={{ x: direction !== 1 ? '100%' : '-100%', width: '100%' }}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled from 'styled-components'
 
 interface LeftSectionProps {
@@ -6,7 +6,7 @@ interface LeftSectionProps {
   prevImage: string;
 }
 
-const LeftSection = ({ swipeToImage, prevImage }: LeftSectionProps) => (
+const LeftSection: FC<LeftSectionProps> = ({ swipeToImage, prevImage }) => (
   <LeftSectionWrapper>
     <PrevImage src={prevImage} onClick={() => swipeToImage(-1)} />
   </LeftSectionWrapper>

@@ -2,8 +2,17 @@ import React from "react";
 
 import styled from "styled-components"
 
-// todo: typescript
-const Indicators = ({ data, activeImage }: any) => (
+interface DataItem {
+  id: number;
+  currentImage: string;
+  headline: string;
+  date: string;
+  author: string;
+  prevImage: string;
+  nextImage: string;
+}
+
+const Indicators = ({ data, activeImage }: { data: DataItem[], activeImage: number }) => (
   <IndicatorsWrapper>
     <IndicatorsContent>{data[activeImage].id + 1} of {data.length}</IndicatorsContent>
     <IndicatorsElements>
