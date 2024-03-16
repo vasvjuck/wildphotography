@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
 import { AnimatePresence, motion } from "framer-motion"
 import styled from 'styled-components'
-import { nanoid } from 'nanoid'
 
 interface BackdropProps {
-  direction: number;
+  imageCount: number;
   currentImage: string;
+  direction: number;
 }
 
-const Backdrop: FC<BackdropProps> = ({ currentImage, direction }) => (
-  <AnimatePresence key={nanoid()}>
+const Backdrop: FC<BackdropProps> = ({ imageCount, currentImage, direction }) => (
+  <AnimatePresence key={imageCount}>
     <WrapperElement
       initial={{ x: direction !== 1 ? '100%' : '-100%', width: '100%' }}
       animate={{ x: '0%', width: '100%' }}

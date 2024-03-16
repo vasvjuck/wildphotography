@@ -2,17 +2,17 @@ import { MotionValue, motion } from 'framer-motion'
 import React from 'react'
 import styled from 'styled-components'
 import { CursorElement } from './CursorElement'
+
 interface CursorProps {
   x: MotionValue<number>;
   y: MotionValue<number>;
+  isLoading: boolean;
 }
 
-const Cursor = ({ x, y }: CursorProps) => (
+const Cursor = ({ x, y, isLoading }: CursorProps) => (
   <ContainerCursor>
-    <WrapperCursor
-      style={{ x, y }}
-    >
-      <CursorElement />
+    <WrapperCursor style={{ x, y }} >
+      <CursorElement isLoading={isLoading} />
     </WrapperCursor>
   </ContainerCursor>
 )
