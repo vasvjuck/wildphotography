@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { sliderVariants, transition } from "@/utils/framerMotion"
 import { motion, AnimatePresence } from "framer-motion"
 import styled from 'styled-components'
@@ -38,7 +38,7 @@ const ActiveImage = ({ direction, imageCount, activeImage, activeImageIndex, swi
   }
 
   useEffect(() => {
-    findOverflowLetters(wrapperRef.current, headingRef.current)
+    findOverflowLetters(wrapperRef.current!, headingRef.current!)
   }, [activeImage]);
 
   return (
@@ -109,5 +109,6 @@ const Heading = styled.h1`
   text-transform: uppercase;
   text-align: center;
   user-select: none;
+  max-width: 844px;
 `
 export default ActiveImage

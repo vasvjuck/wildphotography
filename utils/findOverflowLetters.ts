@@ -1,5 +1,5 @@
 // todo
-export const findOverflowLetters = (baseBlock: any, text: any) => {
+export const findOverflowLetters = (baseBlock: HTMLElement, text: any) => {
   const { top, bottom, right, left } = baseBlock.getBoundingClientRect();
 
   const overflowLetters = [...text.children].filter(letter => {
