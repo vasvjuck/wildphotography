@@ -37,18 +37,18 @@ const AuthorContainer = styled.div`
   flex-direction: column;
   gap: 20px;
   max-width: 110px;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 10px;
   `
 const Author = styled.p`
-  font-size: 20px;
   font-weight: 400;
 `
 const Date = styled.p`
-  font-size: 16px;
   font-weight: 400;
   text-align: end;
 `
 const Link = styled.a`
-  font-size: 10px;
+  font-weight: 700;
   padding: 8px 16px;
   background-color: #fff;
   color: #202020;

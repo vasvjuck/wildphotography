@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { fonts } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +14,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={fonts}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

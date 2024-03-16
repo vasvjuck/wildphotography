@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <Main onMouseMove={handleMouseMove}>
       <Cursor x={x} y={y} />
-      <AnimatePresence mode='wait' key={imageCount}>
+      <AnimatePresence key={imageCount}>
         <Wrapper
           initial={{ x: direction !== 1 ? '100%' : '-100%', width: '100%' }}
           animate={{ x: '0%', width: '100%' }}
