@@ -1,7 +1,6 @@
 import { MotionValue, motion } from 'framer-motion'
 import React from 'react'
 import styled from 'styled-components'
-import { CursorElement } from './CursorElement'
 
 interface CursorProps {
   x: MotionValue<number>;
@@ -10,14 +9,16 @@ interface CursorProps {
 }
 
 const Cursor = ({ x, y, isLoading }: CursorProps) => (
-  <ContainerCursor>
-    <WrapperCursor style={{ x, y }} >
-      <CursorElement isLoading={isLoading} />
-    </WrapperCursor>
-  </ContainerCursor>
+  <Container>
+    <CursorWrapper style={{ x, y }} >
+      <Circle $loading={isLoading}>
+        <Dot />
+      </Circle>
+    </CursorWrapper>
+  </Container>
 )
 
-const ContainerCursor = styled.div`
+const Container = styled.div`
  pointer-events: none;
  position: relative;
  position: fixed;
@@ -27,16 +28,41 @@ const ContainerCursor = styled.div`
  left: 0;
  z-index: 1;
 `
-const WrapperCursor = styled(motion.div)`
+const CursorWrapper = styled(motion.div)`
   position: absolute;
-  top: -40px;
-  left: -60px;
-  width: 60px;
-  height: 60px;
-  will-change: transform;
-  contain: layout style size;
+  top: -30px;
+  left: -30px;
+  width: 42px;
+  height: 42px;
   pointer-events: none;
   z-index: 999;
+`
+const Circle = styled.div<{ $loading?: boolean; }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 42px;
+  width: 42px;
+  border: 2px solid #b3b3b3;
+  border-top: ${props => props.$loading ? "2px #fff solid" : null};
+  animation: ${props => props.$loading ? "spin 1.6s infinite linear" : null};
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(359deg);
+    }
+  }
+`
+const Dot = styled.div`
+  height: 4px;
+  width: 4px;
+  background-color: #fff;
+  border-radius: 50%;
 `
 
 export default Cursor;
