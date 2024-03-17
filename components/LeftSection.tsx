@@ -8,7 +8,7 @@ interface LeftSectionProps {
 
 const LeftSection: FC<LeftSectionProps> = ({ swipeToImage, prevImage }) => (
   <LeftSectionContainer>
-    <Logo>XYZ Photography</Logo>
+    <Logo href='/'>XYZ Photography</Logo>
     <PrevImage src={prevImage} onClick={() => swipeToImage(-1)} />
   </LeftSectionContainer>
 );
@@ -20,9 +20,16 @@ const LeftSectionContainer = styled.div`
   padding: 16px 0 16px 16px;
   height: 100%
 `
-const Logo = styled.div`
+const Logo = styled.a`
   font-size: 16px;
   text-transform: uppercase;
+
+  transition: color .4s ease-in-out;
+
+  &:hover {
+    color: #d8d9cf;
+  }
+
 `
 const PrevImage = styled.img`
   height: 330px;
