@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
@@ -9,7 +10,7 @@ interface LeftSectionProps {
 const LeftSection: FC<LeftSectionProps> = ({ swipeToImage, prevImage }) => (
   <LeftSectionContainer>
     <Logo href='/'>XYZ Photography</Logo>
-    <PrevImage src={prevImage} onClick={() => swipeToImage(-1)} />
+    <PrevImage height={330} width={248} src={prevImage} onClick={() => swipeToImage(-1)} alt='' />
   </LeftSectionContainer>
 );
 
@@ -23,7 +24,6 @@ const LeftSectionContainer = styled.div`
 const Logo = styled.a`
   font-size: 16px;
   text-transform: uppercase;
-
   transition: color .4s ease-in-out;
 
   &:hover {
@@ -31,7 +31,7 @@ const Logo = styled.a`
   }
 
 `
-const PrevImage = styled.img`
+const PrevImage = styled(Image)`
   height: 330px;
   width: 248px;
   border-radius: 10px;

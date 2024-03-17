@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react'
 import styled from 'styled-components'
 
@@ -10,7 +11,7 @@ interface RightSectionProps {
 
 const RightSection = ({ swipeToImage, nextImage, author, date }: RightSectionProps) => (
   <RightSectionContainer>
-    <NextImage src={nextImage} onClick={() => swipeToImage(1)} />
+    <NextImage height={330} width={248} src={nextImage} onClick={() => swipeToImage(1)} alt='' />
     <AuthorContainer>
       <Author>{author}</Author>
       <Date>{date}</Date>
@@ -26,9 +27,7 @@ const RightSectionContainer = styled.div`
   padding: 16px 16px 93px 0;
   height: 100%;
 `
-const NextImage = styled.img`
-  height: 330px;
-  width: 248px;
+const NextImage = styled(Image)`
   border-radius: 10px;
   border: 1px solid #000;
 `
@@ -40,11 +39,8 @@ const AuthorContainer = styled.div`
   font-family: 'Helvetica', sans-serif;
   font-size: 10px;
   `
-const Author = styled.p`
-  font-weight: 400;
-`
+const Author = styled.p``
 const Date = styled.p`
-  font-weight: 400;
   text-align: end;
 `
 const Link = styled.a`

@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-import { sliderVariants } from "@/utils/framerMotion"
 import { motion, AnimatePresence } from "framer-motion"
 import styled from 'styled-components'
 import { Indicators } from '@/components';
 import { data } from "@/utils/data"
+
 interface MainSectionProps {
   direction: number;
   imageCount: number;
@@ -25,10 +25,22 @@ interface DragInfo {
 const MainSection: FC<MainSectionProps> = ({ direction, imageCount, activeImage, activeImageIndex, swipeToImage }) => {
   const { headline, currentImage } = activeImage;
 
-  const dragEndHandler = (dragInfo: DragInfo) => {
+  const handleDragEnd = (dragInfo: DragInfo) => {
     const swipeThreshold = 50
     if (dragInfo.offset.x > swipeThreshold) return swipeToImage(-1);
     if (dragInfo.offset.x < -swipeThreshold) return swipeToImage(1);
+  }
+
+  const sliderVariants = {
+    incoming: () => ({
+      scale: 1.2,
+      opacity: 0
+    }),
+    active: { x: 0, scale: 1, opacity: 1 },
+    exit: () => ({
+      scale: 1,
+      opacity: 0.2
+    })
   }
 
   return (
@@ -45,7 +57,7 @@ const MainSection: FC<MainSectionProps> = ({ direction, imageCount, activeImage,
           exit="exit"
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
-          onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
+          onDragEnd={(_, dragInfo) => handleDragEnd(dragInfo)}
           transition={{
             duration: 1.5,
             ease: [0.56, 0.03, 0.12, 1.04]
