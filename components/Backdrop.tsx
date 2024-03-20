@@ -11,7 +11,7 @@ interface BackdropProps {
 const Backdrop: FC<BackdropProps> = ({ imageCount, currentImage, direction }) => (
   <AnimatePresence key={imageCount}>
     <WrapperElement
-      initial={{ x: direction !== 1 ? '100%' : '-100%', width: '100%' }}
+      initial={{ x: direction !== 1 ? '-100%' : '100%', width: '100%' }}
       animate={{ x: '0%', width: '100%' }}
       transition={{ duration: 1.5, ease: 'easeInOut' }}
     >
